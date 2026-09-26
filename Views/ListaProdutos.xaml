@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiAppMinhasCompras.Views.ListaProdutos"
+             Title="Minhas Compras">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+" Clicked="ToolbarItem_Clicked" />
+    </ContentPage.ToolbarItems>
+
+    <StackLayout Padding="15" Spacing="10">
+        <Label Text="Filtrar por Categoria:" FontAttributes="Bold" />
+
+        <Picker x:Name="pck_filtro_categoria" 
+                Title="Selecione para filtrar" 
+                SelectedIndexChanged="pck_filtro_categoria_SelectedIndexChanged">
+            <Picker.Items>
+                <x:String>Todas</x:String>
+                <x:String>Alimentos</x:String>
+                <x:String>Higiene</x:String>
+                <x:String>Limpeza</x:String>
+                <x:String>Outros</x:String>
+            </Picker.Items>
+        </Picker>
+
+        <!-- Bloco do Relatório por Categoria -->
+        <Frame BackgroundColor="#E8F5E9" BorderColor="#4CAF50" Padding="15">
+            <Label x:Name="lbl_total_categoria" 
+                   Text="Total da Categoria: R$ 0,00" 
+                   FontAttributes="Bold" 
+                   FontSize="16" 
+                   TextColor="#2E7D32" 
+                   HorizontalOptions="Center" />
+        </Frame>
+
+        <ListView x:Name="lst_produtos">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <!-- Menu de Contexto inserido corretamente dentro do ViewCell -->
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Excluir" 
+                                      Clicked="MenuItem_Excluir_Clicked" 
+                                      IsDestructive="True" />
+                        </ViewCell.ContextActions>
+
+                        <!-- Layout do item na lista -->
+                        <HorizontalStackLayout Padding="5">
+                            <Label Text="{Binding Descricao}" FontSize="16" />
+                        </HorizontalStackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </StackLayout>
+</ContentPage>
